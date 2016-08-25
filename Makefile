@@ -17,14 +17,14 @@ clean:
 		$(TEST)
 
 $(TEST):	$(TEST).c $(MODULE).a
-	@gcc \
+	@gcc -std=c99 \
 		-Wall \
 		-I/opt/local/include \
 		-I. \
 		-o $@ \
 		$< \
 		$(MODULE).a \
-		`pkg-config --cflags --libs check`
+		`pkg-config --cflags --libs check` \
 		-L/opt/local/lib \
 		-lcheck
 
@@ -36,4 +36,4 @@ $(MODULE).a:	$(MODULE).o
 	@ranlib $@
 
 $(MODULE).o:	$(MODULE).c
-	@gcc -std=gnu99 -c -o $(MODULE).o $<
+	@gcc -std=c99 -c -o $(MODULE).o $<
